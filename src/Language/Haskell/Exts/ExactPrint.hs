@@ -58,6 +58,9 @@ instance Monad EP where
         (b, l2, c2, s2) = f l1 c1
     in (b, l2, c2, s1 . s2)
 
+instance MonadFail EP where
+   fail = error "EP fail"
+
 runEP :: EP () -> [Comment] -> String
 runEP (EP f) cs = let (_,_,_,s) = f (1,1) cs in s ""
 
